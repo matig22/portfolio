@@ -12,12 +12,23 @@
   Demo de Grace: enlazar aquí cuando esté publicada.
 -->
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){
+  var theme='';
+  try{theme=localStorage.getItem('portfolio-theme')||''}catch(e){}
+  if(theme!=='dark'&&theme!=='light')theme=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  document.documentElement.dataset.theme=theme;
+})();
+</script>
 <style>
 @font-face{font-family:Archivo;src:url(fonts/archivo.woff2) format('woff2');font-weight:100 900;font-stretch:62% 125%;font-display:swap}
 :root{--blue:#1a3bd1;--navy:#0f1b57;--pale:#e9efff;--white:#f6f8ff;--soft:#c8d3ff;--or:#ff8f1c;--gr:#3ed36b;--sky:#8fd0ff;--br:#b97a3c;--sky2:#3b9be8}
+:root[data-theme="dark"]{color-scheme:dark;--blue:#101522;--navy:#121a2b;--pale:#202a3b;--white:#f4f6fb;--soft:#c4cde0;--or:#ffad4d}
+:root[data-theme="dark"] .pale{color:var(--white)}
+:root[data-theme] .pale,:root[data-theme] .navy{transition:background-color .25s,color .25s}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--blue);color:var(--white);font:400 18px/1.6 Archivo,"Arial Narrow",system-ui,sans-serif;overflow-x:hidden}
+body{background:var(--blue);color:var(--white);font:400 18px/1.6 Archivo,"Arial Narrow",system-ui,sans-serif;overflow-x:hidden;transition:background-color .25s,color .25s}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--or);outline-offset:3px}
 .big{font-weight:900;font-stretch:62%;line-height:.88;letter-spacing:-.01em}
@@ -43,6 +54,9 @@ p{max-width:62ch}
 .hero>*:not(svg){position:relative;z-index:1}
 .top{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px clamp(28px,6vw,100px);font-weight:600;font-stretch:90%}
 .top nav{display:flex;gap:26px;flex-wrap:wrap}.top a{text-decoration:none}.top a:hover{text-decoration:underline 3px var(--or);text-underline-offset:6px}
+.theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border:1px solid currentColor;border-radius:99px;background:transparent;color:inherit;font:inherit;font-size:14px;cursor:pointer;transition:transform .2s,color .2s}
+.theme-toggle:hover{transform:translateY(-2px);color:var(--or)}
+.theme-icon{font-size:18px;line-height:1}
 h1{font-size:clamp(64px,min(16vw,23svh),260px);padding:0 clamp(28px,6vw,100px)}
 .ln{display:block;overflow:hidden;padding-top:.03em}
 .ln i{display:block;font-style:normal;transform:translateY(108%);animation:up 1s cubic-bezier(.2,.85,.2,1) forwards}
@@ -100,11 +114,11 @@ footer{margin-top:80px;color:var(--soft);font-size:15px}
   <svg class="wires" viewBox="0 0 1600 900" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg>
   <div class="top">
     <span id="hora">Córdoba, Argentina</span>
-    <nav><a href="#grace">Grace</a><a href="#experiencia">Experiencia</a><a href="#herramientas">Herramientas</a><a href="#contacto">Contacto</a></nav>
+    <nav><a href="#grace">Grace</a><a href="#experiencia">Experiencia</a><a href="#herramientas">Herramientas</a><a href="#contacto">Contacto</a><button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Activar modo oscuro"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Modo oscuro</span></button></nav>
   </div>
   <h1 class="big"><span class="ln"><i>Matías</i></span><span class="ln"><i>Marco</i></span><span class="ln"><i>Galli</i></span></h1>
   <div>
-    <p class="lead">Desarrollo apps web que siguen andando sin internet. Y soy el que instala las redes por donde viajan los datos.</p>
+    <p class="lead">Desarrollo aplicaciones web para problemas reales. También conecto las redes por donde viajan los datos.</p>
     <div class="btns"><a class="btn main" href="#grace">Ver Grace Indumentarias</a><a class="btn" href="#contacto">Escribirme</a></div>
   </div>
 </header>
@@ -170,6 +184,20 @@ footer{margin-top:80px;color:var(--soft);font-size:15px}
 
 <script>
 (function(){
+  // Alternar tema y recordar la elección
+  var themeBtn=document.getElementById('theme-toggle');
+  function setTheme(theme,save){
+    var dark=theme==='dark';
+    document.documentElement.dataset.theme=dark?'dark':'light';
+    themeBtn.setAttribute('aria-pressed',String(dark));
+    themeBtn.setAttribute('aria-label',dark?'Activar modo claro':'Activar modo oscuro');
+    themeBtn.querySelector('.theme-icon').textContent=dark?'☀':'☾';
+    themeBtn.querySelector('.theme-label').textContent=dark?'Modo claro':'Modo oscuro';
+    if(save){try{localStorage.setItem('portfolio-theme',dark?'dark':'light')}catch(e){}}
+  }
+  setTheme(document.documentElement.dataset.theme||'light',false);
+  themeBtn.addEventListener('click',function(){setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark',true)});
+
   // Cables de red: orden T568B (los de rayas llevan un hilo blanco encima)
   var NS='http://www.w3.org/2000/svg',svg=document.querySelector('.wires'),
       cols=['#ff8f1c','#ff8f1c','#3ed36b','#8fd0ff','#8fd0ff','#3ed36b','#b97a3c','#b97a3c'],
