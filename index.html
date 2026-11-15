@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matías Marco Galli, desarrollador full stack</title>
+<meta name="description" content="Desarrollo apps web que siguen andando sin internet e instalo las redes por donde viajan los datos. Conocé Grace Indumentarias.">
+<meta property="og:title" content="Matías Marco Galli, desarrollador full stack">
+<meta property="og:description" content="Apps web offline-first con base de datos y pruebas automáticas. Conocé Grace Indumentarias.">
+<!--
+  EDITAR ANTES DE PUBLICAR (buscá y reemplazá):
+  Demo de Grace: enlazar aquí cuando esté publicada.
+-->
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Archivo;src:url(fonts/archivo.woff2) format('woff2');font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+:root{--blue:#1a3bd1;--navy:#0f1b57;--pale:#e9efff;--white:#f6f8ff;--soft:#c8d3ff;--or:#ff8f1c;--gr:#3ed36b;--sky:#8fd0ff;--br:#b97a3c;--sky2:#3b9be8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--blue);color:var(--white);font:400 18px/1.6 Archivo,"Arial Narrow",system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--or);outline-offset:3px}
+.big{font-weight:900;font-stretch:62%;line-height:.88;letter-spacing:-.01em}
+section{padding:clamp(72px,10vw,150px) clamp(28px,6vw,100px)}
+.pale{background:var(--pale);color:var(--navy)}.navy{background:var(--navy)}
+h2{font-size:clamp(46px,8vw,120px);margin-bottom:.4em}
+p{max-width:62ch}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;padding:13px 24px;border:2px solid currentColor;border-radius:99px;text-decoration:none;font-weight:700;font-stretch:90%;transition:background .2s,color .2s,transform .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn.main{background:var(--or);border-color:var(--or);color:var(--navy)}
+.btn.main:hover{background:var(--white);border-color:var(--white)}
+#run{position:fixed;left:0;top:0;width:6px;height:100%;background:rgba(128,150,255,.25);z-index:9}
+#run i{display:block;height:100%;background:var(--or);transform:scaleY(0);transform-origin:top}
+
+/* Portada */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;padding-bottom:clamp(40px,6vw,80px)}
+.wires{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.wires path{fill:none;stroke-linecap:round;stroke-width:15}
+.w{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.7s cubic-bezier(.5,.1,.2,1) forwards;animation-delay:calc(.35s + var(--i)*.11s)}
+.s{stroke:var(--white);stroke-width:5!important;stroke-dasharray:.011 .019;opacity:0;animation:show .6s 2.3s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes show{to{opacity:.95}}
+.hero>*:not(svg){position:relative;z-index:1}
+.top{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px clamp(28px,6vw,100px);font-weight:600;font-stretch:90%}
+.top nav{display:flex;gap:26px;flex-wrap:wrap}.top a{text-decoration:none}.top a:hover{text-decoration:underline 3px var(--or);text-underline-offset:6px}
+h1{font-size:clamp(64px,min(16vw,23svh),260px);padding:0 clamp(28px,6vw,100px)}
+.ln{display:block;overflow:hidden;padding-top:.03em}
+.ln i{display:block;font-style:normal;transform:translateY(108%);animation:up 1s cubic-bezier(.2,.85,.2,1) forwards}
+.ln:nth-child(1) i{animation-delay:.1s}.ln:nth-child(2) i{animation-delay:.22s}.ln:nth-child(3) i{animation-delay:.34s}
+@keyframes up{to{transform:none}}
+.lead{padding:0 clamp(28px,6vw,100px);font-size:clamp(20px,2.4vw,30px);line-height:1.35;font-stretch:90%;font-weight:500;max-width:34ch}
+.hero .btns{padding:0 clamp(28px,6vw,100px)}
+
+/* Quién soy */
+.about{display:grid;grid-template-columns:230px 1fr;gap:clamp(28px,5vw,80px);align-items:start}
+.about img{width:100%;aspect-ratio:1;object-fit:cover;object-position:center 30%;box-shadow:14px 14px 0 var(--or)}
+.about p{font-size:clamp(20px,2.2vw,27px);line-height:1.4}.about p+p{margin-top:1em;color:var(--soft);font-size:18px}
+
+/* Grace */
+.grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(30px,5vw,80px);align-items:center}
+.spec{margin-top:28px}
+.spec div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:12px 0 12px 18px;border-left:7px solid var(--c);margin-bottom:10px}
+.spec dt{font-weight:800;font-stretch:85%}
+.note{margin-top:16px;font-size:15px;opacity:.8}
+.phones{display:flex;justify-content:center;align-items:center;padding:30px 26px;overflow:hidden}
+.phones img{position:relative;height:min(46vh,420px);width:auto;border:7px solid var(--navy);border-radius:30px;background:var(--navy);margin:0 -24px;transition:transform .4s cubic-bezier(.2,.85,.2,1)}
+.phones img:nth-child(1){transform:rotate(-8deg) translateY(22px)}.phones img:nth-child(3){transform:rotate(8deg) translateY(22px)}
+.phones img:hover{transform:rotate(0) translateY(-12px) scale(1.05);z-index:2}
+
+/* Experiencia */
+.job{display:grid;grid-template-columns:minmax(150px,.5fr) 2fr;gap:clamp(18px,4vw,60px);padding:34px 0 34px 24px;border-left:8px solid var(--c);margin-bottom:28px}
+.yr{font-size:clamp(64px,9vw,130px);color:transparent;-webkit-text-stroke:2px var(--white)}
+.job h3{font-size:clamp(24px,3vw,38px);line-height:1.1;font-stretch:80%;font-weight:800}
+.job .at{color:var(--soft);margin:6px 0 12px}
+.job ul{padding-left:20px;max-width:62ch}.job li{margin:6px 0}
+
+/* Herramientas */
+.row{display:grid;grid-template-columns:170px 1fr;gap:20px;padding:22px 0;border-top:3px solid var(--c)}
+.row h3{font-size:18px;font-stretch:85%;font-weight:800}
+.row p{max-width:none}
+.row span{display:inline-block;font-weight:800;font-stretch:62%;font-size:clamp(30px,4.8vw,62px);line-height:1.05;margin-right:.3em;text-decoration:underline 0 var(--c);text-underline-offset:6px;transition:text-decoration-thickness .2s}
+.row span:hover{text-decoration-thickness:8px}
+.row span+span::before{content:"/";opacity:.3;margin-right:.3em}
+
+/* Estudios y contacto */
+.study{display:grid;grid-template-columns:160px 1fr;gap:20px;padding:14px 0;border-top:1px solid rgba(200,211,255,.3)}
+.study b{font-stretch:80%;font-weight:800}
+.mail{display:block;font-size:clamp(18px,6.2vw,92px);margin:.25em 0 .3em;text-decoration:none;white-space:nowrap;word-break:normal;letter-spacing:-.04em;transition:color .2s}
+.mail:hover{color:var(--or)}
+footer{margin-top:80px;color:var(--soft);font-size:15px}
+
+@media (max-width:820px){.about,.grid,.job,.row,.study{grid-template-columns:1fr}.about img{max-width:200px}.spec div{grid-template-columns:1fr;gap:2px}.phones img{height:250px;margin:0 -14px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.w{stroke-dashoffset:0}.s{opacity:.95}.ln i{transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="run" aria-hidden="true"><i></i></div>
+
+<header class="hero" id="inicio">
+  <svg class="wires" viewBox="0 0 1600 900" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg>
+  <div class="top">
+    <span id="hora">Córdoba, Argentina</span>
+    <nav><a href="#grace">Grace</a><a href="#experiencia">Experiencia</a><a href="#herramientas">Herramientas</a><a href="#contacto">Contacto</a></nav>
+  </div>
+  <h1 class="big"><span class="ln"><i>Matías</i></span><span class="ln"><i>Marco</i></span><span class="ln"><i>Galli</i></span></h1>
+  <div>
+    <p class="lead">Desarrollo apps web que siguen andando sin internet. Y soy el que instala las redes por donde viajan los datos.</p>
+    <div class="btns"><a class="btn main" href="#grace">Ver Grace Indumentarias</a><a class="btn" href="#contacto">Escribirme</a></div>
+  </div>
+</header>
+
+<section id="sobre">
+  <div class="about">
+    <img src="imgs/foto_para_CV.png" alt="Matías Marco Galli" width="230" height="230">
+    <div>
+      <p>Estudio Ingeniería en Sistemas en la UTN de Córdoba y trabajo en dos mundos que casi nunca se cruzan: pasé años tirando cable y configurando cámaras en casas y comercios, y ahora programo las aplicaciones que esa gente usa.</p>
+      <p>Eso me enseñó a pensar en quién usa lo que hago. Trabajo desde Río Tercero, Córdoba, de forma remota o presencial. También atendí público en un banco, así que sé explicar lo técnico sin marear.</p>
+    </div>
+  </div>
+</section>
+
+<section id="grace" class="pale">
+  <div class="grid">
+    <div>
+      <h2 class="big">Grace Indumentarias</h2>
+      <p>Una app para celular que una persona real usa todos los días para llevar su negocio de ropa: compras por lote en Chile, stock con fotos, ventas, pagos, deudas y balance, con las ganancias calculadas en pesos chilenos, argentinos y dólares.</p>
+      <dl class="spec">
+        <div style="--c:var(--or)"><dt>Interfaz</dt><dd>React 18, Vite y Material Design 3, con letra grande y pasos cortos.</dd></div>
+        <div style="--c:var(--gr)"><dt>Datos</dt><dd>Supabase con PostgreSQL: 10 tablas, migraciones SQL versionadas, seguridad RLS y fotos en almacenamiento privado.</dd></div>
+        <div style="--c:var(--sky2)"><dt>Sin conexión</dt><dd>Sigue funcionando sin internet (IndexedDB, localStorage y Service Worker) y sincroniza entre celulares.</dd></div>
+        <div style="--c:var(--br)"><dt>Privacidad</dt><dd>Sesión obligatoria y PIN para ver costos, ganancias y deudas.</dd></div>
+        <div style="--c:var(--navy)"><dt>Calidad</dt><dd>Más de 30 archivos de pruebas automáticas con Vitest, ESLint, Prettier y publicación continua en Netlify.</dd></div>
+      </dl>
+      <div class="btns"><a class="btn main" href="#grace">Ver el proyecto</a><a class="btn" href="https://github.com/matig22/Grace-showcase" target="_blank" rel="noopener noreferrer">Ver el repositorio</a></div>
+      <p class="note">La demo usa datos inventados y no toca ninguna base: podés tocar todo. El PIN de la zona privada es 1234.</p>
+    </div>
+    <div class="phones" aria-label="Capturas de la demo">
+      <img src="imgs/home.jpg" alt="Pantalla de inicio de Grace" loading="lazy"><img src="imgs/stock.jpg" alt="Pantalla de stock" loading="lazy"><img src="imgs/ventas.jpg" alt="Pantalla de ventas" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="experiencia">
+  <h2 class="big">Experiencia</h2>
+  <div class="job" style="--c:var(--or)"><div class="yr big">2026</div><div><h3>Desarrollador full stack, Proyecto Grace Indumentarias</h3><p class="at">Desde septiembre de 2026, proyecto independiente en producción</p><ul><li>Diseño y desarrollo completo: interfaz, base de datos, seguridad, pruebas y publicación.</li><li>Exportación de estados de cuenta a Excel y cálculo de costos y ganancias en varias monedas.</li></ul></div></div>
+  <div class="job" style="--c:var(--sky)"><div class="yr big">2022</div><div><h3>Técnico en instalación de redes y sistemas de seguridad, NetMax Redes</h3><p class="at">Desde 2022, Tancacha, Córdoba (contratos temporales de 2 meses por año)</p><ul><li>Instalación y configuración de redes y wifi para clientes residenciales y comerciales.</li><li>Instalación y mantenimiento de cámaras, NVR y DVR.</li><li>Diagnóstico y resolución de problemas en campo, cumpliendo plazos y normas de trabajo.</li></ul></div></div>
+  <div class="job" style="--c:var(--gr)"><div class="yr big">2017</div><div><h3>Pasantía educativo-laboral, Banco de la Provincia de Córdoba</h3><p class="at">Agosto y septiembre de 2017, sucursal Tancacha, 96 horas</p><ul><li>Apoyo administrativo y atención al público; primer contacto con los procesos del sector financiero.</li></ul></div></div>
+</section>
+
+<section id="herramientas" class="pale">
+  <h2 class="big">Herramientas</h2>
+  <div class="row" style="--c:var(--or)"><h3>Interfaz</h3><p><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>PWA</span><span>UI y UX</span></p></div>
+  <div class="row" style="--c:var(--gr)"><h3>Datos y servidor</h3><p><span>PostgreSQL</span><span>Supabase</span><span>SQL</span><span>MongoDB</span><span>Node.js</span><span>Python</span></p></div>
+  <div class="row" style="--c:var(--sky2)"><h3>Flujo de trabajo</h3><p><span>Git</span><span>GitHub</span><span>Vite</span><span>Vitest</span><span>Netlify</span><span>Linux</span><span>Windows</span></p></div>
+  <div class="row" style="--c:var(--br)"><h3>Redes y seguridad</h3><p><span>Redes</span><span>Wifi</span><span>Cámaras</span><span>NVR y DVR</span></p></div>
+  <div class="row" style="--c:var(--navy)"><h3>Personales</h3><p><span>Pensamiento crítico</span><span>Autonomía</span><span>Trabajo en equipo</span><span>Inglés B1 a B2</span></p></div>
+</section>
+
+<section id="contacto" class="navy">
+  <h2 class="big">Estudios</h2>
+  <div class="study"><b>2022 a hoy</b><span>Ingeniería en Sistemas (en curso), UTN, Facultad Regional Córdoba</span></div>
+  <div class="study"><b>2024</b><span>Fundamentos de la Programación en JavaScript, Fundación de Capacitación Integral</span></div>
+  <div class="study"><b>2021</b><span>Cajero de supermercado, 50 horas, FAECYS y RENFOCEC</span></div>
+  <div class="study"><b>2012 a 2017</b><span>Bachiller en Economía y Administración, Instituto Manuel Belgrano, Tancacha</span></div>
+  <p style="margin-top:110px;font-size:clamp(22px,3vw,36px);line-height:1.2;font-stretch:85%;font-weight:600">¿Tenés un proyecto o una vacante? Escribime.</p>
+  <a class="mail big" href="mailto:matiasgalli20@gmail.com">matiasgalli20@gmail.com</a>
+  <div class="btns" style="margin-top:0"><a class="btn" href="https://ar.linkedin.com/in/galli-matias-marco" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="btn" href="https://github.com/matig22" target="_blank" rel="noopener noreferrer">GitHub</a><a class="btn main" href="./CV_Matias_Galli.pdf" download="CV_Matias_Galli.pdf">Descargar CV (PDF)</a></div>
+  <footer>Matías Marco Galli, Río Tercero, Córdoba, Argentina.</footer>
+</section>
+
+<script>
+(function(){
+  // Cables de red: orden T568B (los de rayas llevan un hilo blanco encima)
+  var NS='http://www.w3.org/2000/svg',svg=document.querySelector('.wires'),
+      cols=['#ff8f1c','#ff8f1c','#3ed36b','#8fd0ff','#8fd0ff','#3ed36b','#b97a3c','#b97a3c'],
+      stripe=[1,0,1,0,1,0,1,0],paths=[],mx=.5,my=.5,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  cols.forEach(function(c,i){
+    var p=document.createElementNS(NS,'path');p.setAttribute('pathLength','1');p.setAttribute('class','w');p.style.setProperty('--i',i);p.setAttribute('stroke',c);svg.appendChild(p);paths.push(p);
+    if(stripe[i]){var q=document.createElementNS(NS,'path');q.setAttribute('pathLength','1');q.setAttribute('class','s');svg.appendChild(q);paths.push(q);p._q=q;}
+  });
+  function draw(t){
+    var i=0;
+    paths.forEach(function(p){
+      if(p.getAttribute('class')==='s')return;
+      var y0=90+i*62,ye=300+i*17,o=Math.sin(t*.0006+i*.8)*46,pull=(my-.5)*240*(i%2?-1:1),
+          d='M-40 '+y0+' C 520 '+(y0+o+pull)+' 1040 '+(ye-o-pull)+' 1640 '+ye;
+      p.setAttribute('d',d);if(p._q)p._q.setAttribute('d',d);i++;
+    });
+  }
+  draw(0);
+  if(!reduce){
+    var hero=document.querySelector('.hero'),on=true;
+    function loop(t){if(!on)return;draw(t);requestAnimationFrame(loop)}
+    new IntersectionObserver(function(e){var was=on;on=e[0].isIntersecting;if(on&&!was)requestAnimationFrame(loop)}).observe(hero);
+    hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width;my=(e.clientY-r.top)/r.height});
+    requestAnimationFrame(loop);
+  }
+  // Hora en Córdoba
+  var h=document.getElementById('hora'),f=new Intl.DateTimeFormat('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'America/Argentina/Cordoba'});
+  function tick(){h.textContent='Ahora son las '+f.format(new Date())+' en Córdoba'}tick();setInterval(tick,30000);
+  // Cable que baja con la página
+  var bar=document.querySelector('#run i');
+  function sc(){var m=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleY('+(m>0?scrollY/m:0)+')'}
+  addEventListener('scroll',sc,{passive:true});sc();
+})();
+</script>
+</body>
+</html>
