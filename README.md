@@ -4,5 +4,6 @@ Sitio personal de presentación profesional. Incluye el caso de estudio de Grace
 
 El sitio es estático: abrir `index.html` o publicarlo en un hosting para sitios estáticos. La fuente Archivo y su licencia están en `fonts/`.
 
+- Portfolio en vivo: [portfolio-galli-matias.netlify.app](https://portfolio-galli-matias.netlify.app/)
 - GitHub: [matig22](https://github.com/matig22)
 - LinkedIn: [Matías Galli](https://ar.linkedin.com/in/galli-matias-marco)
